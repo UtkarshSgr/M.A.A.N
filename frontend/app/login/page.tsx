@@ -21,7 +21,7 @@ export default function TraderLogin() {
   const [maskedPhone, setMaskedPhone] = useState('');
 
   // Validation rules
-  const GSTIN_REGEX = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+  const GSTIN_REGEX = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$/;
   const AADHAAR_REGEX = /^\d{12}$/;
 
   const trimmedInput = inputValue.trim();
@@ -41,7 +41,8 @@ export default function TraderLogin() {
     }
   };
 
-  const handleSendOtp = () => {
+  const handleSendOtp = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!isValid || isSending) return;
     setIsSending(true);
 
@@ -58,7 +59,8 @@ export default function TraderLogin() {
     }, 1200);
   };
 
-  const handleVerify = () => {
+  const handleVerify = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (otp.length !== 6 || isVerifying) return;
     setIsVerifying(true);
     setTimeout(() => {
@@ -128,7 +130,10 @@ export default function TraderLogin() {
 
         {/* Dynamic View: OTP Verification Form vs Input Form */}
         {showOtpForm ? (
-          <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+          <form 
+            onSubmit={handleVerify}
+            className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300"
+          >
             <div>
               <label className="block text-sm font-semibold text-zinc-900 mb-2">
                 Secure OTP
@@ -144,8 +149,7 @@ export default function TraderLogin() {
             </div>
 
             <button 
-              type="button"
-              onClick={handleVerify}
+              type="submit"
               disabled={otp.length !== 6 || isVerifying}
               className="w-full h-12 bg-zinc-900 text-white rounded-xl font-semibold hover:bg-zinc-800 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 active:scale-[0.99]"
             >
@@ -159,9 +163,12 @@ export default function TraderLogin() {
             >
               <ArrowLeft className="w-4 h-4" /> Back to edit number
             </button>
-          </div>
+          </form>
         ) : (
-          <div className="space-y-4 animate-in fade-in slide-in-from-left-4 duration-300">
+          <form 
+            onSubmit={handleSendOtp}
+            className="space-y-4 animate-in fade-in slide-in-from-left-4 duration-300"
+          >
             
             {/* Identity Mode Toggle */}
             <div className="flex p-1 bg-slate-100 rounded-xl border border-slate-200 mb-4">
@@ -210,7 +217,7 @@ export default function TraderLogin() {
               {showError && (
                 <p className="text-xs text-red-600 font-medium mt-1.5 animate-in fade-in">
                   {authMode === 'gstin' 
-                    ? 'Please enter a valid 15-character GSTIN' 
+                    ? 'Invalid GSTIN format' 
                     : 'Please enter a valid 12-digit Aadhaar number'}
                 </p>
               )}
@@ -218,8 +225,7 @@ export default function TraderLogin() {
 
             {/* Send OTP Action Button */}
             <button 
-              type="button"
-              onClick={handleSendOtp}
+              type="submit"
               disabled={!isValid || isSending}
               className="w-full h-12 bg-zinc-900 text-white rounded-xl font-semibold hover:bg-zinc-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99]"
             >
@@ -235,7 +241,7 @@ export default function TraderLogin() {
                 VLE / Agent Login via Digital Seva
               </button>
             </div>
-          </div>
+          </form>
         )}
         
       </div>
