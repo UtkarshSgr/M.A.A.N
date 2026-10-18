@@ -1,16 +1,5 @@
 # M.A.A.N. (मान)
 ### Metrological Assurance, Authentication & Network
-*Smart India Hackathon 2026 | Team Tech Titans | National Institute of Technology Calicut*
-
-[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg)](https://fastapi.tiangolo.com)
-[![Next.js 14](https://img.shields.io/badge/Frontend-Next.js%2014%20SSR-black.svg)](https://nextjs.org)
-[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL%20%2B%20PostGIS-336791.svg)](https://www.postgresql.org)
-[![Flutter](https://img.shields.io/badge/Mobile-Flutter%20%2B%20Hive-02569B.svg)](https://flutter.dev)
-[![Status](https://img.shields.io/badge/Readiness-TRL--4-blue.svg)]()
-
----
-
-## 📌 Executive Summary
 **M.A.A.N.** is an automated regulatory operating system designed to digitize and enforce the **Legal Metrology Act, 2009** and the **Legal Metrology (General) Rules, 2011**. It bridges physical calibration with digital trust by eliminating manual field calculations, preventing scale-cloning fraud, and enabling zero-app citizen verification.
 
 ---
